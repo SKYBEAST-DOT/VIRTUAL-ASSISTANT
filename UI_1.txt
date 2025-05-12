@@ -1,0 +1,49 @@
+import tkinter as tk
+from tkinter import messagebox
+import pyttsx3
+import threading
+
+# Initialize text-to-speech engine
+engine = pyttsx3.init()
+
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+
+def process_command():
+    # Simulating assistant response
+    command = entry.get()
+    if command.lower() == "who is the pm of india":
+        response = "Narendra Modi is the Prime Minister of India."
+    else:
+        response = "Sorry, I don't know that."
+    
+    # Show response in the UI
+    messagebox.showinfo("Assistant", response)
+    speak(response)
+
+def listen_to_voice():
+    # Placeholder function for voice commands
+    speak("Voice commands are not integrated yet.")
+    messagebox.showinfo("Assistant", "Voice commands coming soon!")
+
+# Create the main window
+root = tk.Tk()
+root.title("Virtual Assistant")
+root.geometry("400x200")
+
+# Create input and buttons
+label = tk.Label(root, text="Enter your command:")
+label.pack(pady=10)
+
+entry = tk.Entry(root, width=40)
+entry.pack(pady=5)
+
+button = tk.Button(root, text="Ask Assistant", command=lambda: threading.Thread(target=process_command).start())
+button.pack(pady=5)
+
+voice_button = tk.Button(root, text="Use Voice", command=lambda: threading.Thread(target=listen_to_voice).start())
+voice_button.pack(pady=5)
+
+# Run the application
+root.mainloop()
